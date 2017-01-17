@@ -1,0 +1,3 @@
+[submodule "dn-kafka"]
+	path = dn-kafka
+	url = https://github.com/Datanexus/dn-kafka

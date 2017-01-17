@@ -1,0 +1,5 @@
+---
+# solr_url: "https://download.lucidworks.com/fusion-2.4.4.tar.gz",
+solr_url: "https://10.0.2.2/fusion-2.4.4.tar.gz"
+solr_addr: 192.168.34.12
+solr_dir: "/opt/fusion"

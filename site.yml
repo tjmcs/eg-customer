@@ -1,0 +1,13 @@
+---
+- name: Setup eg-customer environment
+  hosts: "{{host_inventory}}"
+  vars_files:
+    - vars/global.yml
+    - vars/dn-kafka.yml
+  become: true
+  roles:
+    - role: dn-kafka/common-roles/ensure-interfaces-up
+    - role: dn-kafka/common-roles/setup-web-proxy
+    - role: dn-kafka/common-roles/install-packages
+      package_list: "{{kafka_package_list}}"
+    - role: dn-kafka
