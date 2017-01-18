@@ -1,7 +1,7 @@
 ---
 # kafka_url: "https://www-us.apache.org/dist/kafka/0.10.1.0/kafka_2.11-0.10.1.0.tgz"
 kafka_url: "https://10.0.2.2/dist/kafka/0.10.1.0/kafka_2.11-0.10.1.0.tgz"
-kafka_addr: 192.168.34.8
+kafka_iface: eth1
 kafka_distro: apache
 kafka_dir: "/opt/kafka"
 kafka_topics: ["metrics", "logs"]
