@@ -2,4 +2,10 @@
 ---
 proxy: "{{ lookup('env','http_proxy') }}"
 no_proxy: "{{ lookup('env','no_proxy') }}"
-proxy_env: { http_proxy: "{{proxy}}", no_proxy: "{{no_proxy}}" }
+proxy_username: "{{ lookup('env','proxy_username') }}"
+proxy_password: "{{ lookup('env','proxy_password') }}"
+proxy_env:
+  http_proxy: "{{proxy}}"
+  no_proxy: "{{no_proxy}}"
+  proxy_username: "{{proxy_username}}"
+  proxy_password: "{{proxy_password}}"
