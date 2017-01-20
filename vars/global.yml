@@ -1,5 +1,7 @@
 # (c) 2016 DataNexus Inc.  All Rights Reserved
 ---
+# proxy-related variables (values are retrieved from the corresponding
+# environment variables, if they are set)
 proxy: "{{ lookup('env','http_proxy') }}"
 no_proxy: "{{ lookup('env','no_proxy') }}"
 proxy_username: "{{ lookup('env','proxy_username') }}"
@@ -9,3 +11,13 @@ proxy_env:
   no_proxy: "{{no_proxy}}"
   proxy_username: "{{proxy_username}}"
   proxy_password: "{{proxy_password}}"
+# the list of packages that should be installed on every node
+default_packages:
+  - java-1.8.0-openjdk
+  - net-tools
+install_packages_by_tag:
+  kafka:
+    - bind-utils
+  solr:
+    - nmap
+    - tomcat

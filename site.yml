@@ -4,13 +4,15 @@
   hosts: "{{host_inventory}}"
   vars_files:
     - vars/global.yml
-    - vars/dn-kafka.yml
+    - dn-kafka/vars/deployment-settings.yml
+  vars:
+    - combined_package_list: "{{ (default_packages|default([])) | union(kafka_package_list) | union((install_packages_by_tag|default({})).kafka|default([])) }}"
   roles:
     - role: dn-kafka/common-roles/ensure-interfaces-up
     - role: dn-kafka/common-roles/get-iface-addr
       iface_name: "{{kafka_iface}}"
     - role: dn-kafka/common-roles/setup-web-proxy
     - role: dn-kafka/common-roles/install-packages
-      package_list: "{{kafka_package_list}}"
+      package_list: "{{combined_package_list}}"
     - role: dn-kafka
       kafka_addr: "{{iface_addr}}"
