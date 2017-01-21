@@ -5,6 +5,22 @@
 require 'optparse'
 require 'resolv'
 
+# monkey-patch that is used to leave unrecognized options in the ARGV
+# list so that they can be processed by underlying vagrant command
+class OptionParser
+  # Like order!, but leave any unrecognized --switches alone
+  def order_recognized!(args)
+    extra_opts = []
+    begin
+      order!(args) { |a| extra_opts << a }
+    rescue OptionParser::InvalidOption => e
+      extra_opts << e.args[0]
+      retry
+    end
+    args[0, 0] = extra_opts
+  end
+end
+
 options = {}
 
 optparse = OptionParser.new do |opts|
@@ -27,7 +43,7 @@ end
 
 # default to using the confluent distro if no distro was specified
 begin
-  optparse.parse!
+  optparse.order_recognized!(ARGV)
 rescue SystemExit
   ;
 rescue Exception => e
