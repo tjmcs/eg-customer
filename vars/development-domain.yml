@@ -1,0 +1,6 @@
+# (c) 2016 DataNexus Inc.  All Rights Reserved
+#
+# Variables that are used for all deployments within
+# a given domain ('production', 'test', 'development', etc.)
+---
+domain: development

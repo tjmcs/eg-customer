@@ -3,8 +3,11 @@
 - name: Setup eg-customer environment
   hosts: "{{host_inventory}}"
   vars_files:
-    - vars/global.yml
-    - dn-kafka/vars/deployment-settings.yml
+    - dn-kafka/vars/kafka.yml
+    - vars/cloud.yml
+    - vars/tenant.yml
+    - vars/test-project.yml
+    - vars/development-domain.yml
   vars:
     - combined_package_list: "{{ (default_packages|default([])) | union(kafka_package_list) | union((install_packages_by_tag|default({})).kafka|default([])) }}"
   roles:

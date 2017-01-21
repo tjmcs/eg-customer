@@ -1,4 +1,7 @@
 # (c) 2016 DataNexus Inc.  All Rights Reserved
+#
+# Variables that are used for all deployments in a tenant
+# environment (proxies, extra packages per node, etc.)
 ---
 # proxy-related variables (values are retrieved from the corresponding
 # environment variables, if they are set)

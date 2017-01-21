@@ -1,0 +1,6 @@
+# (c) 2016 DataNexus Inc.  All Rights Reserved
+#
+# Variables that are used for all deployments
+# (split apart by cloud type: 'aws', 'openstack', etc.)
+---
+cloud: vagrant
