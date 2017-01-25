@@ -22,6 +22,7 @@ class OptionParser
 end
 
 options = {}
+no_ip_commands = ['version', 'global-status', '--help', '-h']
 
 optparse = OptionParser.new do |opts|
   opts.banner    = "Usage: #{opts.program_name} [options]"
@@ -45,18 +46,22 @@ end
 begin
   optparse.order_recognized!(ARGV)
 rescue SystemExit
-  ;
+  exit
 rescue Exception => e
   print "ERROR: could not parse command (#{e.message})\n"
   print optparse
   exit 1
 end
 
-if !options[:kafka_addr]
-  print "ERROR; kafka IP address must be supplied vagrant commands\n"
+# check remaining arguments to see if the command requires
+# an IP address (or not)
+ip_required = (ARGV & no_ip_commands).empty?
+
+if ip_required && !options[:kafka_addr]
+  print "ERROR; kafka IP address must be supplied for vagrant commands\n"
   print optparse
   exit 1
-elsif !(options[:kafka_addr] =~ Resolv::IPv4::Regex)
+elsif ip_required && !(options[:kafka_addr] =~ Resolv::IPv4::Regex)
   print "ERROR; input kafka IP address '#{options[:kafka_addr]}' is not a valid IP address"
   exit 2
 end
